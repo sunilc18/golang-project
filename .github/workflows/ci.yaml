@@ -82,7 +82,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        token: ${{ secrets.TOKEN }}
+        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
     - name: Update tag in Helm chart
       run: |
@@ -95,4 +95,5 @@ jobs:
         git config --global user.name "Sunil Chakravarthy"
         git add manifest/deployment.yaml
         git commit -m "Update tag in manifest file"
+        git remote set-url origin https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/sunilc18/golang-project.git
         git push

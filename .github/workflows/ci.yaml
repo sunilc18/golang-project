@@ -14,6 +14,7 @@ env:
   PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+  GITHUB_RUN_ID: ${{ github.run_id }}
 
 jobs:
 
@@ -91,7 +92,7 @@ jobs:
         # sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-web-app-chart/values.yaml
         # sed -i 's|\(image:.*go-web-app:\).*|\1${{github.run_id}}|' manifest/deployment.yaml
         # sed -i 's|image: *sunilc18/go-web-app:.*|image: sunilc18/go-web-app:${{github.run_id}}|' manifest/deployment.yaml
-        sed -i 's|image: *sunilc18/go-web-app:.*|image: sunilc18/go-web-app:NEW_TAG|' manifest/deployment.yaml
+        sed -i "s|image: *sunilc18/go-web-app:.*|image: sunilc18/go-web-app:${{github.run_id}}|" manifest/deployment.yaml
 
     - name: Commit and push changes
       run: |

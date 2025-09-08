@@ -15,7 +15,7 @@ spec:
         app: go-web-app
     spec:
       containers:
-      - image: sunilc18/go-web-app:17558240960
+      - image: sunilc18/go-web-app:17558462068
         name: go-webapp
         ports:
         - containerPort: 8080

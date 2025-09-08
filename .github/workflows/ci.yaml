@@ -92,7 +92,10 @@ jobs:
         # sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-web-app-chart/values.yaml
         # sed -i 's|\(image:.*go-web-app:\).*|\1${{github.run_id}}|' manifest/deployment.yaml
         # sed -i 's|image: *sunilc18/go-web-app:.*|image: sunilc18/go-web-app:${{github.run_id}}|' manifest/deployment.yaml
-        sed -i "s|image: *sunilc18/go-web-app:.*|image: sunilc18/go-web-app:${{github.run_id}}|" manifest/deployment.yaml
+        env:
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: |
+          sed -i "s|image: *sunilc18/go-web-app:.*|image: sunilc18/go-web-app:${GITHUB_RUN_ID}|" manifest/deployment.yaml
 
     - name: Commit and push changes
       run: |

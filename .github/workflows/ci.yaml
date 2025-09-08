@@ -87,11 +87,13 @@ jobs:
       with:
         token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
+    - name: Debug deployment.yaml
+      run: cat manifest/deployment.yaml
     - name: Update tag in Helm chart
       env:
         GITHUB_RUN_ID: ${{ github.run_id }}
       run: |
-        sed -i "s|image: *sunilc18/go-web-app:.*|image: sunilc18/go-web-app:${GITHUB_RUN_ID}|" manifest/deployment.yaml
+        sed -i "s|image:.*go-web-app:.*|image: sunilc18/go-web-app:${GITHUB_RUN_ID}|" manifest/deployment.yaml
 
     - name: Commit and push changes
       run: |

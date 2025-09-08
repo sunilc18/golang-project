@@ -73,6 +73,7 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-web-app:${{github.run_id}}
         platforms: linux/amd64
+        outputs: type=image
 
   update-newtag-in-helm-chart:
     runs-on: ubuntu-latest

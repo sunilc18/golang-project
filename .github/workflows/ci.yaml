@@ -93,6 +93,7 @@ jobs:
       env:
         GITHUB_RUN_ID: ${{ github.run_id }}
       run: |
+        # sed -i "s|image:.*go-web-app:.*|image: sunilc18/go-web-app:${GITHUB_RUN_ID}|" manifest/deployment.yaml
         sed -i "s|image:.*go-web-app:.*|image: sunilc18/go-web-app:${GITHUB_RUN_ID}|" manifest/deployment.yaml
 
     - name: Commit and push changes
